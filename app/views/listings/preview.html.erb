@@ -1,0 +1,70 @@
+<div class="container">
+
+  <div class="row">
+    <div class="col-lg-12" style="margin-bottom:18px;">
+      <h3>
+        <a href="<%= root_path %>">
+          <img src="<%= image_path('logos/logo-small.png') %>" alt="$$$ Dollar Jobs" width="180">
+        </a>
+      </h3>
+      <ul style="float:right; margin:0 20px; padding: 0;margin-top:-39px;">
+        <li style="list-style-type: none; display: inline; background-color: #eee; color: #111; border: 0;padding: 12px;">1. Create your ad</li>
+        <li style="list-style-type: none; display: inline; background-color: #2192f1; color: #fff; font-weight: bold; text-shadow: 0 1px 0 #1963a2; border: 0;padding: 12px;">2. Preview</li>
+        <li style="list-style-type: none; display: inline; background-color: #eee; color: #111; border: 0;padding: 12px;">3. Purchase</li>
+      </ul>
+    </div>
+  </div>
+
+  <hr>
+
+  <div class="row">
+    <div class="col-lg-12">
+      <strong style="font-weight: bold; font-size:20px;color:#c00;"><u>STEP 2 (OF 3): PREVIEW YOUR AD</u></strong>
+      <br><br>
+    </div>
+  </div>
+
+</div>
+
+<%= render 'display_listing' %>
+<div class="container">
+  <div class="row">
+    <div class="col-lg-12">
+      <%= render 'apply_panel' %>
+    </div>
+  </div>
+  <hr>
+</div>
+
+<div class="container">
+  <div class="row">
+    <div class="col-lg-12 listings">
+      <h6 style="color:#c00;">Preview of your ad as it will be displayed on the Homepage</h6>
+      <%= render 'listing', listing: @listing %>
+    </div>
+  </div>
+</div>
+
+<div class="container">
+  <div class="row" style="margin-top:36px;">
+    <div class="actions col-lg-6">
+      <%= render 'orders/razorpay' %> or <u><%= link_to "Make changes", edit_listing_path(@listing) %></u>
+    </div>
+    <div class="col-lg-6">
+      <h4 style="color:#c00;float:right;">Your total cost is:
+        $<span id="order_total"><%= @listing.total_cost_usd ? @listing.total_cost_usd : @listing.listing_cost_usd %></span>
+      </h4>
+    </div>
+  </div>
+</div>
+
+<div class="container-fluid">
+  <div class="row" style="background:#000;color:#aaa;margin-top:45px;margin-bottom:-45px;padding-bottom:18px;border-bottom:1px solid #333;">
+    <div class="col-lg-12">
+      <center>
+        <a href="https://www.razorpay.com" target="_blank" alt="Alternate to Stripe for India" title="Alternate to Stripe for India"><%= image_tag 'powered-by-razorpay.png', alt: 'All payments powered by Razorpay - PCI Compliant', width: 210, style: 'margin-top:36px;' %></a>
+        <p style="font-size:10px;">All payments are processed in INR (Indian Rupees). <br> If you are outside of India then you can select <em>'Card'</em> option to pay. <br> USD is converted to INR at an exchange rate of Rs 72 for this quarter (Updated quarterly).</p>
+      </center>
+    </div>
+  </div>
+</div>

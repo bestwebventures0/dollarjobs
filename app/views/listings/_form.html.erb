@@ -1,0 +1,194 @@
+<div class="container">
+  <div class="row">
+    <div class="col-lg-12" style="margin-bottom:18px;">
+      <h3>
+        <a href="<%= root_path %>">
+          <img src="<%= image_path('logos/logo-small.png') %>" alt="$$$ Dollar Jobs" width="180">
+        </a>
+      </h3>
+      <ul style="float:right; margin:0 20px; padding: 0;margin-top:-39px;">
+        <li style="list-style-type: none; display: inline; background-color: #2192f1; color: #fff; font-weight: bold; text-shadow: 0 1px 0 #1963a2; border: 0;padding: 12px;">1. Create your ad</li>
+        <li style="list-style-type: none; display: inline; background-color: #eee; color: #111; border: 0;padding: 12px;">2. Preview</li>
+        <li style="list-style-type: none; display: inline; background-color: #eee; color: #111; border: 0;padding: 12px;">3. Purchase</li>
+      </ul>
+    </div>
+  </div>
+
+  <hr>
+
+  <div class="row">
+    <div class="col-lg-12">
+      <p style="font-size: 19px;" class="text-left">Your job listing will remain on this site for 60 days and will be automatically emailed to 18,000+ job seekers. We'll give you a full refund if you feel your ad was ineffective or repost your ad again, free for another 60 days.</p><br>
+      <div class="row">
+        <div class="col-lg-10">
+          <strong style="font-weight: bold; font-size:20px;color:#c00;"><u>STEP 1 (OF 3): CREATE YOUR AD</u></strong>
+        </div>
+        <div class="col-lg-2">
+          <h6 style="color:#c00;float:right;margin-top:9px;"><span style="color:#000;text-decoration:line-through;">$249</span> $<%= @price.basic %></h6>
+        </div>
+      </div>
+      <hr>
+      <%= form_with(model: listing, local: true) do |form| %>
+        <% if listing.errors.any? %>
+          <div id="error_explanation">
+            <h2><%= pluralize(listing.errors.count, "error") %> prohibited this listing from being saved:</h2>
+
+            <ul>
+            <% listing.errors.full_messages.each do |message| %>
+              <li><%= message %></li>
+            <% end %>
+            </ul>
+          </div>
+        <% end %>
+
+        <div class="field">
+          <%= form.label :title, class: 'required' %>
+          <%= form.text_field :title, placeholder: "e.g. Senior Sales Executive" %>
+        </div>
+
+        <div class="field">
+          <%= form.label :description, class: 'required' %>
+          <%= form.rich_text_area :description %>
+        </div>
+
+        <div class="field">
+          <%= form.label :category_id, class: 'required' %>
+          <%= form.collection_select :category_id, Category.order(:title),:id,:title, include_blank: true %>
+        </div>
+
+        <div class="field">
+          <%= form.label :industry, class: 'required' %>
+          <%= form.text_field :industry, placeholder: "e.g. Software, Medical, Automobile, Technology etc." %>
+        </div>
+
+        <div class="field">
+          <%= form.label :location, class: 'required' %>
+          <%= form.text_field :location, placeholder: "e.g. Bengaluru, KA" %>
+        </div>
+
+        <div class="field">
+          <%= form.label :how_to_apply, class: 'required' %>
+          <%= form.rich_text_area :how_to_apply %>
+        </div>
+
+        <div class="field">
+          <%= form.label :company_name, class: 'required' %>
+          <%= form.text_field :company_name, placeholder: "e.g. Dollarjobs" %>
+        </div>
+
+        <div class="field">
+          <%= form.label :company_logo %>
+          <%= form.file_field :company_logo %>
+        </div>
+
+        <div class="field">
+          <%= form.label :company_website, class: 'required' %>
+          <%= form.text_field :company_website, placeholder: "e.g. https://www.dollarjobs.co" %>
+        </div>
+
+        <div class="field">
+          <%= form.label :company_email, class: 'required' %>
+          <%= form.text_field :company_email, placeholder: "e.g. support@dollarjobs.co" %>
+        </div>
+
+        <div class="field" style="margin-bottom:36px;">
+          <%= form.label :company_about, class: 'required' %>
+          <%= form.rich_text_area :company_about %>
+        </div>
+
+        <div class="row">
+          <div class="field col-lg-2" style="float:left;">
+            <%= form.label :highlight %>
+            <%= form.check_box :highlight %>
+          </div>
+          <div class="col-lg-5">
+            <%= image_tag 'highlighted.png', width: '360' %>
+          </div>
+          <div class="col-lg-3">
+            <span style="font-size:12px;color:#999;"><em>Your ad listing will be highlighted with yellow background on the Homepage</em></span>
+          </div>
+          <div class="col-lg-2">
+            <h6 style="color:#c00;float:right;margin-top:18px;"><span style="color:#000;text-decoration:line-through;">$49</span> $<%= @price.highlight %></h6>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="field col-lg-2" style="float:left;">
+            <%= form.label :featured %>
+            <%= form.check_box :sticky %>
+          </div>
+          <div class="col-lg-5">
+            <%= image_tag 'featured.png', width: '360' %>
+          </div>
+          <div class="col-lg-3">
+            <span style="font-size:12px;color:#999;"><em>Your ad listing will be sticky and stay at top under its category on the Homepage</em></span>
+          </div>
+          <div class="col-lg-2">
+            <h6 style="color:#c00;float:right;margin-top:18px;"><span style="color:#000;text-decoration:line-through;">$199</span> $<%= @price.sticky %></h6>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="field col-lg-2" style="float:left;">
+            <%= form.label :logo_displayed %>
+            <%= form.check_box :logo_displayed %>
+            <p id="upload_your_logo_verify" style="color:#c00;font-size:.72em;font-weight:bold;display:none;">Make sure you have uploaded your company logo</p>
+          </div>
+          <div class="col-lg-5">
+            <%= image_tag 'logohighlighted.png', width: '360' %>
+          </div>
+          <div class="col-lg-3">
+            <span style="font-size:12px;color:#999;"><em>Company Logo will be displayed at front of your ad listing on the Homepage</em></span>
+          </div>
+          <div class="col-lg-2">
+            <h6 style="color:#c00;float:right;margin-top:18px;"><span style="color:#000;text-decoration:line-through;">$99</span> $<%= @price.logo_displayed %></h6>
+          </div>
+        </div>
+
+        <hr>
+        <div class="row" style="margin-top:36px;">
+          <div class="actions col-lg-6">
+            <%= submit_tag 'Continue to Step 2 to preview your ad', class: "btn btn-primary" %>
+          </div>
+          <div class="col-lg-6">
+            <h4 style="color:#c00;float:right;">Your total cost is:
+              $<span id="order_total"><%= listing.total_cost_usd ? listing.total_cost_usd : listing.listing_cost_usd %></span>
+            </h4>
+          </div>
+        </div>
+      <% end %>
+
+    </div>
+  </div>
+
+</div>
+
+<script type="text/javascript">
+  var listing_logo_display_checkbox = document.getElementById('listing_logo_displayed');
+  var listing_sticky_checkbox = document.getElementById('listing_sticky');
+  var listing_highlight_checkbox = document.getElementById('listing_highlight');
+  var text = document.getElementById('upload_your_logo_verify');
+  listing_logo_display_checkbox.onchange = function() {
+     if(listing_logo_display_checkbox.checked) {
+      document.getElementById("order_total").textContent = parseInt(document.getElementById("order_total").textContent, 10) + <%= @price.logo_displayed %>;
+      text.style.display = "block";
+     } else {
+      document.getElementById("order_total").textContent = parseInt(document.getElementById("order_total").textContent, 10) - <%= @price.logo_displayed %>;
+      text.style.display = "none";
+     }
+  };
+  listing_sticky_checkbox.onchange = function() {
+     if(listing_sticky_checkbox.checked) {
+      document.getElementById("order_total").textContent = parseInt(document.getElementById("order_total").textContent, 10) + <%= @price.sticky %>;
+     } else {
+      document.getElementById("order_total").textContent = parseInt(document.getElementById("order_total").textContent, 10) - <%= @price.sticky %>;
+     }
+  };
+  listing_highlight_checkbox.onchange = function() {
+     if(listing_highlight_checkbox.checked) {
+      document.getElementById("order_total").textContent = parseInt(document.getElementById("order_total").textContent, 10) + <%= @price.highlight %>;
+     } else {
+      document.getElementById("order_total").textContent = parseInt(document.getElementById("order_total").textContent, 10) - <%= @price.highlight %>;
+     }
+  };
+</script>

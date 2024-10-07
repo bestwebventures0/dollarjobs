@@ -1,0 +1,24 @@
+<!-- Razorpay Automatic Checkout -->
+<style media="screen">
+  .razorpay-payment-button {
+    display: none;
+  }
+</style>
+<form action="/purchase" method="POST">
+<script
+    src="https://checkout.razorpay.com/v1/checkout.js"
+    data-key="<%= "#{Figaro.env.MERCHANT_KEY_ID}" %>"
+    data-amount=<%= @listing.total_cost_rupees * 100 %>
+    data-currency="INR"
+    data-name="Dollar Jobs"
+    data-description="<%= "Biggest Sales Jobs Board on this planet" %>"
+    data-image="<%= image_path 'favicons/favicon-256x256.png' %>"
+    data-prefill.name="<%= "#{@listing.company_name}" %>"
+    data-prefill.email="<%= "#{@listing.company_email}" %>"
+    data-theme.color="#F37254"
+  >
+  </script>
+  <input type="hidden" value="<%= "#{@listing.id}" %>" name="listing_id">
+  <button class="btn btn-primary" style="margin-bottom:18px;" type="submit" value="Buy Now">Continue to Step 3 to purchase your ad
+  </button>
+</form>

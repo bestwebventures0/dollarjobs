@@ -1,0 +1,29 @@
+<% title "About" %>
+
+<div class="container">
+  <%= render 'pages/logo' %>
+  <hr>
+  <div class="row">
+    <div class="col-lg-12">
+      <h2>About us</h2>
+      <h4>Dollar Jobs is the biggest sales jobs board on planet Earth.</h4>
+      <p><%= link_to 'Post a job ad; $249 for 60 days', new_listing_path, class: "btn btn-success" %></p>
+      <br>
+      <h6>What the ****! A Jobs Board for Sales? Who does Sales?</h6>
+      <p>A zillionaire people all over the planet take sales profession as the most badly reputed and tiring; mush (pronounced as much) tiring than even bloody military job :-)</p>
+      <%= image_tag 'military-job.gif', class: 'img-thumbnail', style: "margin: 3px 0 27px 0; width: 450px;" %>
+      <p>But just imagine for a while that if just for one single month all these sales executives, ripping their arses off and doing this badly reputed stuff what you call sales, take rest and stop working. WHAT WILL HAPPEN?</p>
+      <p>Hmmm ... wouldn't there be an economy collapse? You bet it will be.</p>
+      <p>All those working inside glassed walls, called as corporate towers, will ****in collapse, right?</p>
+      <%= image_tag 'sales-job.gif', class: 'img-thumbnail', style: "margin: 3px 0 27px 0;" %>
+      <p>
+        <%= link_to 'Post a job ad; $249 for 60 days', new_listing_path, class: "btn btn-success" %>
+        <br><br>
+        Find and hire the best sales talent, and save economy from collapsing.
+      </p>
+      <hr>
+      <h4 style="margin:36px 0;"><a href="<%= root_path %>">Dollar Jobs</a> is here to save the economy from collapsing <span style="font-size:15px;color:#666;">(read above if you don't know how economy will collapse)</span> by helping corporates, businesses, startups, small to medium enterprises find the SALES TALENT which is <span style="text-decoration:underline;">"ALWAYS CLOSING SALES DEALS"</span> for your business.</h4>
+      <p style="font-size:15px;color:#666;"><em><a href="<%= root_path %>">Dollar Jobs</a> is owned and operated by Mittaltiger Advertising (A division of M/s Mittaltiger Enterprises). We're a small team based in beautiful Bengaluru, Karnataka, India and we're proud to operate Dollar Jobs and a few other biggest / tiniest job boards in the world. Our business model is simple – we love starting and running job boards that help people. We’re passionate about what we do and hope that comes across in how we operate.</em></p>
+    </div>
+  </div>
+</div>

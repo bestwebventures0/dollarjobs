@@ -1,0 +1,89 @@
+// Place all the styles related to the Listings controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+
+
+.listings .listing-anchor {
+  font-weight:bold;
+  letter-spacing: 5px;
+  font-size:1.4rem;
+  margin:36px 0 9px 0;
+  text-transform:uppercase;
+}
+
+.listings .listing-anchor a {
+  color:#c00;
+}
+
+.listings .listing {
+  border-bottom:1px solid #ccc;
+  margin-bottom:0;
+  padding:1em 9px;
+}
+
+.listings .listing .new {
+  background-color: #fc0;
+  color: #040c10;
+  padding: 3px 6px;
+  position: relative;
+  left: -54px;
+  font-weight: bold;
+  font-size: .75em;
+  border-radius: 3px;
+}
+
+.listings .listing .company_name {
+  font-size: 1.1rem;
+  padding:0 21px;
+}
+
+.listings .listing .title {
+  font-size: 1.1rem;
+}
+
+.listings .listing .title a {
+  text-decoration: underline;
+}
+
+.listings .listing .location {
+  color:#999;
+  font-size:15px;
+}
+
+.listings .listing .industry,
+.listing_show .industry {
+  font-size:15px;
+  font-weight:400;
+  color:#999;
+  background:transparent;
+  border: 1.5px solid #999;
+  padding: 3px 9px;
+  border-radius: 6px;
+}
+
+.listing_show .industry {
+  color:#000;
+  border: 1.5px solid #000;
+}
+
+.listings .listing .industry:hover,
+.listing_show .industry:hover {
+  background: #dedede;
+}
+
+.listings .listing .industry a,
+.listing_show .industry a {
+  color: #999;
+  text-decoration: none;
+}
+
+.listing_show .industry a {
+  color: #000;
+}
+
+.listings .listing .sticky {
+  float:right;
+  color:#c4b179;
+}
+
+label.required:after{content:"*"}

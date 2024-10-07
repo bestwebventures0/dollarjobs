@@ -1,0 +1,60 @@
+<%= content_for(:title, "#{ @listing.title } at #{ @listing.company_name } in #{ @listing.location }") %>
+
+<div class="container">
+
+  <div class="row">
+    <div class="col-lg-12" style="margin-bottom:18px;">
+      <h3>
+        <a href="<%= root_path %>">
+          <img src="<%= image_path('logos/logo-small.png') %>" alt="$$$ Dollar Jobs" width="180">
+        </a>
+      </h3>
+    </div>
+  </div>
+
+  <hr>
+
+  <div class="row">
+    <div class="col-lg-12">
+      <p class="back_and_other_links_show">
+        <span><%= link_to "← Back to all jobs", listings_path %></span>
+        <span style="float:right;"><%= link_to "See more #{@listing.category.title} jobs →", listings_by_category_path(@listing.category) %></span>
+      </p>
+      <br>
+    </div>
+  </div>
+</div>
+
+<%= render 'display_listing' %>
+<div class="container">
+  <div class="row">
+    <div class="col-lg-12">
+      <%= render 'apply_panel' %>
+    </div>
+  </div>
+</div>
+
+<div class="container">
+  <div class="row justify-content-md-center">
+    <div class="col-lg-12 listings">
+      <!-- Display other listings for a company -->
+      <% unless @other_listings.empty? -%>
+        <center><h2 style="margin:90px 0 36px 0;font-weight:bold;">Other job ad listings at <%= @company_name %></h2></center>
+        <%= content_for :rss_feed, auto_discovery_link_tag(:rss, listings_by_company_name_url(@company_name, format: :rss)) %>
+        <% @other_listings_sticky.each do |listing| -%>
+          <%= render 'listing', listing: listing %>
+        <% end %>
+        <% @other_listings_non_sticky.each do |listing| -%>
+          <%= render 'listing', listing: listing %>
+        <% end %>
+        <p class="back_and_other_links">
+          <span> <%= link_to "← Back to all jobs", listings_path %> </span>
+          <span style="float:right;"><%= link_to "See more #{@listing.category.title} jobs →", listings_by_category_path(@listing.category) %></span>
+        </p>
+        <center>
+          <%= link_to "View all jobs at #{@company_name}", listings_by_company_name_path(@company_name), class: "btn btn-primary", style: "margin-top:36px;" %>
+        </center>
+      <% end %>
+    </div>
+  </div>
+</div>

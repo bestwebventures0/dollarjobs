@@ -1,0 +1,37 @@
+<div class="container">
+
+  <div class="row listing_show">
+    <div class="col-lg-10">
+      <h2 style="font-weight:700; margin-bottom:0px;"><%= @listing.title %></h2>
+      <p style="text-transform:uppercase;font-size:14px;color:#666;">posted <%= @listing.created_at.strftime("%b %d") %></p>
+      <p style="font-weight:600; font-size: 22px; margin-bottom:0px;"><%= @listing.company_name %></p>
+      <p style="font-weight:700; margin-bottom:18px;">Headquarters: <%= @listing.location %></p>
+      <p style="font-weight:700; margin-bottom:18px;">Industry: <span class="industry">  <a href="<%= listings_by_industry_path(@listing.industry) %>" title="View all jobs in <%= @listing.industry %> Industry"><%= @listing.industry %></a></span>&nbsp;&nbsp;<span class="industry"><a href="<%= listings_by_category_path(@listing.category) %>" title="View all <%= @listing.category.title %> jobs"><%= @listing.category.title %></a></span></p>
+      <p style="font-weight:700; margin-bottom:0px;"><a href="<%= @listing.company_website %>" target="_blank"><%= @listing.company_website %></a></p>
+      <p style="font-weight:700; margin-bottom:0px;"><a href="<%= listings_by_company_name_path(@listing.company_name) %>">View all jobs at <%= @listing.company_name %></a></p>
+    </div>
+    <div class="col-lg-2">
+      <%= image_tag @listing.company_logo.variant(resize: '240x240'), style: "float:right;margin-bottom:36px;", class: 'img-fluid' if @listing.company_logo.attached? %>
+      <div class="" style="">
+        <%= social_share_button_tag(@listing.title, :url => listing_url(@listing), :image => @listing.company_logo.attached? ? @listing.company_logo.variant(resize: '240x240') : '', desc: @listing.title, via: "dollarjobs108") %>
+      </div>
+    </div>
+  </div>
+  <hr>
+
+  <div class="row">
+    <div class="col-lg-12">
+      <p><%= @listing.description %></p>
+    </div>
+  </div>
+
+  <hr>
+
+  <div class="row">
+    <div class="col-lg-12">
+      <h5 style="font-weight:bold;margin-top:18px;">About <%= @listing.company_name %></h5>
+      <p><%= @listing.company_about %></p>
+    </div>
+  </div>
+
+</div>

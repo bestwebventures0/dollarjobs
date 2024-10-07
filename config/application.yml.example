@@ -1,0 +1,16 @@
+# Add configuration values here, as shown below.
+#
+# pusher_app_id:
+# pusher_key:
+# pusher_secret:
+# stripe_api_key:
+# stripe_publishable_key:
+#
+# production:
+#   stripe_api_key:
+#   stripe_publishable_key:
+
+## RAZORPAY KEYS FOR dollarjobs.co
+# production:
+#   MERCHANT_KEY_ID:
+#   MERCHANT_KEY_SECRET:

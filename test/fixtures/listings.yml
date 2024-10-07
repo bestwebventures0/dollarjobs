@@ -1,0 +1,50 @@
+# == Schema Information
+#
+# Table name: listings
+#
+#  id              :integer          not null, primary key
+#  company_email   :string
+#  company_name    :string
+#  company_website :string
+#  expired         :boolean
+#  highlight       :boolean
+#  industry        :string
+#  location        :string
+#  logo_displayed  :boolean
+#  paid            :boolean
+#  sticky          :boolean
+#  title           :string
+#  created_at      :datetime         not null
+#  updated_at      :datetime         not null
+#  category_id     :integer
+#
+
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  title: MyString
+  description: MyText
+  category_id: 1
+  location: MyString
+  how_to_apply: MyText
+  company_name: MyString
+  company_website: MyString
+  company_email: MyString
+  company_about: MyText
+  highlight: false
+  sticky: false
+  logo_displayed: false
+
+two:
+  title: MyString
+  description: MyText
+  category_id: 1
+  location: MyString
+  how_to_apply: MyText
+  company_name: MyString
+  company_website: MyString
+  company_email: MyString
+  company_about: MyText
+  highlight: false
+  sticky: false
+  logo_displayed: false

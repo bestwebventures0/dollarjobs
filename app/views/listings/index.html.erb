@@ -1,0 +1,143 @@
+<div class="container">
+  <div class="row justify-content-md-center">
+    <div class="col-lg-7">
+      <h1 id="logo">
+        <a href="<%= root_path %>"><img src="<%= image_path('logos/logo.png') %>" alt="$$$ Dollar Jobs" class="responsive"></a>
+      </h1>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-lg-12">
+      <h2 style="text-align:justify;" class="punchline">
+        World's magical beast of
+        <% @categories_for_punchline.each do |category| -%>
+          <% if category.equal? @categories_for_punchline.last %>
+            <a href="<%= listings_by_category_path(category) %>">
+              <%= category.title %>
+            </a>
+          <% else -%>
+            <a href="<%= listings_by_category_path(category) %>"><%= category.title %></a>,
+          <% end %>
+        <% end %>
+        etc job board with thousands of unique users and hundreds of new positions posted each month!
+      </h2>
+      <p id="punch_header"><strong>It is 2019 and businesses (including startups) are still struggling to hire good sales and marketing talent.</strong> IF you are seeking desired talent on Indeed, Monster, Careerbuilder, Timesjobs, Naukri etc for your business AND still struggling to find any THEN you have come to the right place <span><a href="<%= root_path %>">dollar jobs</a></span>. <span style="color:#666;text-decoration:underline;"><em>You may wonder, why dollarjobs? <strong>Ans:</strong> Only Sales and Marketing efforts bring dollars (money) into your business, nothing else</em></span>.</p>
+      <center>
+        <%= link_to(raw("Post a job ad: <em><span style='text-decoration:line-through;font-size:90%;'>$249 for 60 days</span></em>"), new_listing_path, class: "btn btn-success", style: "margin-bottom:36px;", alt: "Post a sales job ad for $#{@price.basic} for 60 days") %>
+        <br>
+        <span style='font-weight:bold;color:#c00;position:relative;top:-36px;'>
+          &nbsp;&nbsp;$<%= @price.basic %> for 60 days
+          <em style="font-size:12px;color:#333;">(Limited Time Offer)</em>
+         </span>
+      </center>
+    </div>
+  </div>
+</div>
+
+<hr>
+
+<div class="container-fluid">
+  <div class="row">
+    <!-- Begin Mailchimp Signup Form -->
+    <link href="//cdn-images.mailchimp.com/embedcode/horizontal-slim-10_7.css" rel="stylesheet" type="text/css">
+    <style type="text/css">
+      #mc_embed_signup{background:#fff; clear:left; font:14px Helvetica,Arial,sans-serif; width:100%;}
+      /* Add your own Mailchimp form style overrides in your site stylesheet or in this style block.
+         We recommend moving this block and the preceding CSS link to the HEAD of your HTML file. */
+    </style>
+    <div id="mc_embed_signup">
+    <form action="https://gmail.us20.list-manage.com/subscribe/post?u=db053d29d2bcb15cacae4d12c&amp;id=acb74f7ee0" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate" target="_blank" novalidate>
+        <div id="mc_embed_signup_scroll">
+      <label for="mce-EMAIL">Get new job listing ads sent to your email inbox every week</label>
+      <input type="email" value="" name="EMAIL" class="email" id="mce-EMAIL" placeholder="email address" required>
+        <!-- real people should not fill this in and expect good things - do not remove this or risk form bot signups-->
+        <div style="position: absolute; left: -5000px;" aria-hidden="true"><input type="text" name="b_db053d29d2bcb15cacae4d12c_acb74f7ee0" tabindex="-1" value=""></div>
+        <div class="clear"><input type="submit" value="Subscribe" name="subscribe" id="mc-embedded-subscribe" class="button"></div>
+        </div>
+    </form>
+    </div>
+    <!--End mc_embed_signup-->
+  </div>
+</div>
+
+<div class="container">
+  <div class="row justify-content-md-center">
+    <div class="col-lg-12 listings">
+      <!-- Display all listing for single category -->
+      <% if @category -%>
+        <%= content_for :rss_feed, auto_discovery_link_tag(:rss, listings_by_category_url(format: :rss)) %>
+        <h4 class="listing-anchor">
+          <%= link_to @category.title + ' Jobs', listings_by_category_path(@category) %>
+          <%= link_to image_tag('rss-feed.svg', style: "margin-top:-9px;"), listings_by_category_url(:format => :rss) %>
+        </h4>
+        <% @category.listings.where("paid = ? and created_at >= ?", true, Date.today - 60.days).order(created_at: :desc).sort_by{ |l| l.sticky ? 0 : 1 }.each do |listing| -%>
+          <%= render 'listing', listing: listing %>
+        <% end %>
+        <p class="back_and_other_links">
+          <span> <%= link_to "← Back to all jobs", listings_path %> </span>
+        </p>
+      <!-- Display listings for a company -->
+      <% elsif @company_name -%>
+        <% unless Listing.where("paid = ? and created_at >= ? and company_name = ?", true, Date.today - 60.days, @company_name).empty? -%>
+          <%= content_for :rss_feed, auto_discovery_link_tag(:rss, listings_by_company_name_url(format: :rss)) %>
+          <h4 class="listing-anchor">
+            <%= link_to 'Jobs at ' +  @company_name, listings_by_company_name_path(@company_name) %>
+            <%= link_to image_tag('rss-feed.svg', style: "margin-top:-9px;"), listings_by_company_name_url(format: :rss) %>
+          </h4>
+          <% Listing.where("paid = ? and created_at >= ? and company_name = ?", true, Date.today - 60.days, @company_name).order(created_at: :desc).sort_by{ |l| l.sticky ? 0 : 1 }.each do |listing| -%>
+            <%= render 'listing', listing: listing %>
+          <% end %>
+        <% else %>
+          <div class="" style="background:#ccc;padding:36px;margin-top:36px;">
+            <span>Sorry, the company you were looking for doesn’t seem to exist anymore.</span>
+          </div>
+        <% end %>
+        <p class="back_and_other_links">
+          <span> <%= link_to "← Back to all jobs", listings_path %> </span>
+        </p>
+      <!-- Display listings for a industry -->
+      <% elsif @industry -%>
+        <% unless Listing.where("paid = ? and created_at >= ? and industry = ?", true, Date.today - 60.days, @industry).empty? -%>
+          <%= content_for :rss_feed, auto_discovery_link_tag(:rss, listings_by_industry_url(format: :rss)) %>
+          <h4 class="listing-anchor">
+            <%= link_to @industry + ' Industry Jobs', listings_by_industry_path(@industry) %>
+            <%= link_to image_tag('rss-feed.svg', style: "margin-top:-9px;"), listings_by_industry_url(format: :rss) %>
+          </h4>
+          <% Listing.where("paid = ? and created_at >= ? and industry = ?", true, Date.today - 60.days, @industry).order(created_at: :desc).sort_by{ |l| l.sticky ? 0 : 1 }.each do |listing| -%>
+            <%= render 'listing', listing: listing %>
+          <% end %>
+        <% else %>
+          <div class="" style="background:#ccc;padding:36px;margin-top:36px;">
+            <span>Sorry, the industry you were looking for doesn’t seem to have any job listing ads anymore.</span>
+          </div>
+        <% end %>
+        <p class="back_and_other_links">
+          <span> <%= link_to "← Back to all jobs", listings_path %> </span>
+        </p>
+      <!-- Display all listings -->
+      <% else -%>
+        <%= content_for :rss_feed, auto_discovery_link_tag(:rss, listings_url(format: :rss)) %>
+        <% @categories.each do |category| %>
+          <h4 class="listing-anchor">
+            <%= link_to category.title + ' Jobs', listings_by_category_path(category) %>
+            <%= link_to image_tag('rss-feed.svg', style: "margin-top:-9px;"), listings_by_category_url(category: category, :format => :rss) %>
+          </h4>
+
+          <% if category.listings.where("created_at >= ?", Date.today - 60.days).size > 30 %>
+            <% category.listings.where("paid = ? and created_at >= ?", true, Date.today - 60.days).order(created_at: :desc).limit(30).sort_by{ |l| l.sticky ? 0 : 1 }.each do |listing| -%>
+              <%= render 'listing', listing: listing %>
+            <% end %>
+            <p class="back_and_other_links">
+              <span> <%= link_to "View all " + category.title + " jobs →", listings_by_category_path(category) %> </span>
+            </p>
+          <% else %>
+            <% category.listings.where("paid = ? and created_at >= ?", true, Date.today - 60.days).order(created_at: :desc).sort_by{ |l| l.sticky ? 0 : 1 }.each do |listing| -%>
+              <%= render 'listing', listing: listing %>
+            <% end %>
+          <% end %>
+
+        <% end %>
+      <% end %>
+    </div>
+  </div>
+</div>

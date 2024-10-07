@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Dollar Jobs - <%= content_for?(:title) ? yield(:title) : 'The Biggest Sales Jobs Board on Planet' %></title>
+
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <meta name="author" content="DollarJobs | Mittaltiger Enterprises">
+    <meta name="description" content="<%= content_for?(:description) ? yield(:description) : 'DollarJobs is the Biggest Sales Jobs Board and Portal on Planet. Post and Apply for all kind of sales, business development, marketing, digital marketing, advertising etc jobs.' %>">
+    <meta name="keywords" content="Dollarjobs, Dollar, Jobs, Global, Planet, United States, Asia, Middle East, Africa, Europe, Russia, Oceania, Pacific, Australia, India, South America, Sales, Business Development, Marketing, Digital Marketing, Advertising, Communication, Selling, Sell, Naukri, Bechna, Success, Money, Goals, Achieve, Targets">
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+
+    <!-- favicon -->
+    <%= favicon_link_tag asset_path('favicons/favicon.ico') %>
+    <!-- Apple touch icons -->
+    <link href="<%= asset_path('favicons/apple-icon-57x57.png') %>" rel="apple-touch-icon" sizes="57x57" />
+    <link href="<%= asset_path('favicons/apple-icon-60x60.png') %>" rel="apple-touch-icon" sizes="60x60" />
+    <link href="<%= asset_path('favicons/apple-icon-72x72.png') %>" rel="apple-touch-icon" sizes="72x72" />
+    <link href="<%= asset_path('favicons/apple-icon-76x76.png') %>" rel="apple-touch-icon" sizes="76x76" />
+    <link href="<%= asset_path('favicons/apple-icon-114x114.png') %>" rel="apple-touch-icon" sizes="114x114" />
+    <link href="<%= asset_path('favicons/apple-icon-120x120.png') %>" rel="apple-touch-icon" sizes="120x120" />
+    <link href="<%= asset_path('favicons/apple-icon-144x144.png') %>" rel="apple-touch-icon" sizes="144x144" />
+    <link href="<%= asset_path('favicons/apple-icon-152x152.png') %>" rel="apple-touch-icon" sizes="152x152" />
+    <link href="<%= asset_path('favicons/apple-icon-180x180.png') %>" rel="apple-touch-icon" sizes="180x180" />
+    <!-- Android touch icons -->
+    <link href="<%= asset_path('favicons/android-icon-192x192.png') %>" rel="icon" sizes="192x192" />
+    <!-- Windows touch icons -->
+    <meta name="msapplication-square70x70logo" content="<%= asset_path('favicons/ms-icon-70x70.png') %>">
+    <meta name="msapplication-square144x144logo" content="<%= asset_path('favicons/ms-icon-144x144.png') %>">
+    <meta name="msapplication-square150x150logo" content="<%= asset_path('favicons/ms-icon-150x150.png') %>">
+    <meta name="msapplication-square310x310logo" content="<%= asset_path('favicons/ms-icon-310x310.png') %>">
+    <!-- Windows tile theme color -->
+    <meta name="msapplication-TileColor" content="#fff">
+
+    <!-- META TAGS -->
+    <link rel="canonical" href="<%= url_for(:only_path => false) %>" />
+
+    <% if params[:controller] == 'listings' and params[:action] == 'show' %>
+    <link rel="image_src" href="<%= @listing.company_logo.attached? ? asset_path(url_for(@listing.company_logo)) : '' %>">
+    <meta property="og:image" content="<%= @listing.company_logo.attached? ? asset_path(url_for(@listing.company_logo)) : '' %>">
+    <meta name="twitter:image" content="<%= @listing.company_logo.attached? ? asset_path(url_for(@listing.company_logo)) : '' %>">
+    <% else %>
+    <link rel="image_src" href="<%= asset_path('logos/logo.png') %>">
+    <meta property="og:image" content="<%= asset_path('logos/logo.png') %>">
+    <meta name="twitter:image" content="<%= asset_path('logos/logo.png') %>">
+    <% end %>
+
+    <meta property="og:description" content="<%= content_for?(:description) ? yield(:description) : 'DollarJobs is the Biggest Sales Jobs Board and Portal on Planet. Post and Apply for all kind of sales, business development, marketing, digital marketing, advertising etc jobs.' %>">
+
+    <meta property="og:email" content="support@dollarjobs.co" />
+
+    <meta property="og:site_name" content="DollarJobs" />
+    <meta property="og:title" content="DollarJobs <%= content_for?(:title) ? ' - ' + yield(:title) : ' - The Biggest Sales Jobs Board on Planet' %>">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="<%= url_for(:only_path => false) %>">
+
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:site" content="@dollarjobs108">
+    <meta name="twitter:url" content="<%= url_for(:only_path => false) %>">
+    <meta name="twitter:title" content="DollarJobs <%= content_for?(:title) ? ' - ' + yield(:title) : ' - The Biggest Sales Jobs Board on Planet' %>">
+    <meta name="twitter:description" content="<%= content_for?(:description) ? yield(:description) : 'DollarJobs is the Biggest Sales Jobs Board and Portal on Planet. Post and Apply for all kind of sales, business development, marketing, digital marketing, advertising etc jobs.' %>">
+    <meta name="twitter:creator" content="@dollarjobs108">
+    <!-- META TAGS ENDS -->
+
+    <% if Rails.env == "production" %>
+      <!-- Google site verification -->
+      <meta name="google-site-verification" content="Hpg3YxUIJoI1UrcNtRwRsa8FfLEs71b7fvO0tsmP80E" />
+
+      <!-- Global site tag (gtag.js) - Google Analytics -->
+      <script async src="https://www.googletagmanager.com/gtag/js?id=UA-138035813-1"></script>
+      <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        gtag('config', 'UA-138035813-1');
+      </script>
+    <% end %>
+
+    <%= yield :rss_feed %>
+    <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <!-- Add icon library -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
+  </head>
+
+  <body>
+    <%= render 'layouts/flash_notices' %>
+    <div id="main">
+      <%= yield %>
+    </div>
+    <div class="container-fluid">
+      <div class="row">
+        <div class="footer col-lg-12">
+          <center>
+            <p>
+              &copy; 2019 Dollar Jobs - A product of Mittaltiger Advertising. <br>
+              <span style="font-size:12px;color:#999;">
+              Mittaltiger Advertising is a division of <a href="https://www.mittaltiger.com/about/divisions/" target="_blank">Mittaltiger Enterprises</a>.
+              </span>
+            </p>
+            <ul class="footer_menu">
+              <li> • <a href="<%= pages_about_path %>">About</a></li>
+              <li> • <a href="/blog">Blog</a></li>
+              <li> • <a href="<%= pages_terms_path %>">Terms</a></li>
+              <li> • <a href="<%= pages_privacy_path %>">Privacy</a></li>
+              <li> • <a href="<%= pages_contact_path %>">Contact</a></li>
+            </ul>
+            <p style="display:block;" class="post_a_job">
+              <a href="<%= new_listing_path %>">Post a job ad - <span style="text-decoration:line-through;">$249</span> $<%= Price.where(active: true).first.basic %> for 60 days</a>
+            </p>
+            <p class="social_icons">
+              <!-- Add font awesome icons -->
+              <a href="https://www.facebook.com/Dollar-Jobs-526296364443536" target="_blank" class="fa fa-facebook" style="font-size:24px;"></a>
+              <a href="https://twitter.com/dollarjobs108" target="_blank" class="fa fa-twitter" style="font-size:24px;"></a>
+            </p>
+          </center>
+       </div>
+      </div>
+    </div>
+    <% if (params[:controller] == 'listings' and (params[:action] == 'index' or params[:action] == 'show')) or
+          (params[:controller] == 'pages' and (params[:action] == 'about' or params[:action] == 'contact'))
+    -%>
+      <%= render 'layouts/free_book' %>
+    <% end %>
+  </body>
+</html>

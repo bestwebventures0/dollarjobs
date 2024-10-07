@@ -1,0 +1,32 @@
+<h1>Dear <%= @listing.company_email %>, thanks for successfully placing Order No: <%= @order.id %></h1>
+
+<h3>Your order has following details :- </h3>
+
+<table>
+  <thead>
+    <tr>
+      <th>Title</th>
+      <th>Category</th>
+      <th>Industry</th>
+      <th>Company Name</th>
+      <th>Location</th>
+      <th>Order Value</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><%= link_to @listing.title, @listing %></td>
+      <td><%= @listing.category.title %></td>
+      <td><%= @listing.industry %></td>
+      <td><%= @listing.company_name %></td>
+      <td><%= @listing.location %></td>
+      <td>Rs <%= @order.price %></td>
+    </tr>
+  </tbody>
+</table>
+
+<p>
+  To view your job ad listing, just follow this link: <%= listing_url(@listing) %>.
+</p>
+
+<p>Thanks for availing our services and have a great day ahead!</p>

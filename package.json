@@ -1,0 +1,12 @@
+{
+  "name": "mtjobs",
+  "private": true,
+  "dependencies": {
+    "@rails/actiontext": "^6.1.0",
+    "@rails/webpacker": "5.2.1",
+    "trix": "^1.2.0"
+  },
+  "devDependencies": {
+    "webpack-dev-server": "^3.11.0"
+  }
+}

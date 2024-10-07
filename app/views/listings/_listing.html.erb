@@ -1,0 +1,58 @@
+<!-- Job Ad Listing Highlighted / Normal -->
+<p class="listing" style="<%= 'background:#FFFFE0;' if listing.highlight %>">
+  <!-- New Job Ad Listing; Less than 3 days old -->
+  <% if listing.new and params[:action] != 'preview' %>
+    <span class="new">new</span>
+  <% end %>
+  <!-- Job Ad Listing has Logo Displayed or Not -->
+  <% if listing.company_logo.attached? and listing.logo_displayed %>
+    <span style="margin:<%= listing.new and params[:action] != 'preview' ? '0 0px 0 -42px' : '0' %>;">
+      <%= image_tag listing.company_logo.variant(resize: '45x45') %>
+    </span>
+  <% else %>
+    <span style="margin:
+    <% if listing.new and params[:action] != 'preview' %>
+      <%= '0 0px 0 9px' %>
+    <% else %>
+      <%= '0 51px 0 0px' %>
+    <% end %>
+    ;"></span>
+  <% end %>
+  <!-- Job Ad Listing Owner; Company Name -->
+  <span class="company_name">
+    <strong><%= listing.company_name %></strong>
+  </span>
+  <!-- Job Ad Listing Title -->
+  <span class="title">
+    <% unless params[:action] == 'preview' -%>
+      <%= link_to truncate(listing.title, :length => 63, :separator => ' '), listing %>
+    <% else %>
+      <span style="color:#007bff;text-decoration:underline;"><%= truncate(listing.title, :length => 63, :separator => ' ') %></span>
+    <% end %>
+  </span>
+  <!-- Job Ad Listing Location -->
+  <span class="location">
+    &nbsp;-&nbsp;
+    <%= listing.location %>
+  </span>
+  <!-- Job Ad Listing Location -->
+  &nbsp;&nbsp;
+  <span class="industry">
+    <a href="<%= listings_by_industry_path(listing.industry) %>" title="View all jobs in <%= listing.industry %> Industry"><%= listing.industry %></a>
+  </span>
+  <% if url_for(:only_path => false).include?('industries') or url_for(:only_path => false).include?('companies') or params[:action] == 'show' -%>
+    <!-- Job Ad Listing Category -->
+    &nbsp;&nbsp;
+    <span class="industry">
+      <a href="<%= listings_by_category_path(listing.category) %>" title="View all <%= listing.category.title %> jobs"><%= listing.category.title %></a>
+    </span>
+  <% end %>
+  <!-- Featured Job Ad Listing; Sticky -->
+  <span class="sticky" style="<%= "margin-top:9px;" if listing.logo_displayed and params[:action] != 'preview' %>">
+    <% if listing.sticky %>
+      <em>featured</em>
+    <% else %>
+      <%= listing.created_at.strftime("%b %d") %>
+    <% end %>
+  </span>
+</p>
