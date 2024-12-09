@@ -1,10 +1,12 @@
 source 'https://rubygems.org'
 git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
-ruby '2.7.0'
+ruby '3.1.0'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
-gem 'rails', '~> 6.1.0'
+# gem 'rails', '~> 6.1.0'
+## UPGRADE RAILS TO 7.0
+gem 'rails', '~> 7.0.0'
 # Use sqlite3 as the database for Active Record
 gem 'sqlite3', '~> 1.4'
 # Use Puma as the app server
@@ -59,9 +61,9 @@ end
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 
 ## App specific gems
-gem 'annotate'
-gem 'activeadmin'
-gem 'devise'
+gem 'annotate', '~> 3.2.0'
+gem 'activeadmin', '~> 3.0'
+gem 'devise', '~> 4.8.1'
 gem 'image_processing'
 gem 'bootstrap', '~> 4.3.1'
 gem 'jquery-rails'
@@ -78,14 +80,22 @@ gem 'whenever', require: false
 gem 'social-share-button'
 
 ## blog
+gem "webrick"
 # This will help ensure the proper Jekyll version is running.
 # Happy Jekylling!
-gem "jekyll", "~> 3.6.3"
+gem 'jekyll', '~> 3.10'
 # This is the default theme for new Jekyll sites. You may change this to anything you like.
 gem "minima", "~> 2.0"
 # jekyll sitemaps
 gem 'jekyll-sitemap'
 
+## UPGRADE TO RAILS 7.0.0
 gem "brakeman", "~> 5.4"
-
 gem "colorize", "~> 1.1"
+gem 'rexml', '~> 3.2', '>= 3.2.4'
+gem "rack", "~> 2.2"
+gem "sprockets", "~> 4.2"
+gem 'psych', '< 4'
+gem "kramdown-parser-gfm", "~> 1.1"
+gem "jekyll-feed", "~> 0.11.0"
+gem "jekyll-seo-tag", "~> 2.6"

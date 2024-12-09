@@ -2,11 +2,11 @@
   "name": "mtjobs",
   "private": true,
   "dependencies": {
-    "@rails/actiontext": "^6.1.0",
-    "@rails/webpacker": "5.2.1",
-    "trix": "^1.2.0"
+    "@rails/actiontext": "^7.0",
+    "@rails/webpacker": "5.4.4",
+    "trix": "^2.1.8"
   },
   "devDependencies": {
-    "webpack-dev-server": "^3.11.0"
+    "webpack-dev-server": "^5.1.10"
   }
 }
