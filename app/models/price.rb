@@ -13,4 +13,7 @@
 #
 
 class Price < ApplicationRecord
+  def self.ransackable_attributes(auth_object = nil)
+    ["active", "basic", "created_at", "highlight", "id", "logo_displayed", "sticky", "updated_at"]
+  end
 end

@@ -12,6 +12,6 @@ ActiveAdmin.register Listing do
 #   permitted
 # end
 
-  permit_params :title, :description, :category_id, :location, :how_to_apply, :company_name, :company_website, :company_email, :company_about, :highlight, :sticky, :logo_displayed, :industry
+  permit_params :title, :description, :category_id, :location, :how_to_apply, :company_name, :company_website, :company_email, :company_about, :highlight, :sticky, :logo_displayed, :industry, :paid, :expired
 
 end
