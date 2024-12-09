@@ -334,7 +334,7 @@ GEM
       builder (~> 3.0)
     social-share-button (1.2.3)
       coffee-rails
-    spring (2.1.1)
+    spring (4.2.1)
     sprockets (4.2.1)
       concurrent-ruby (~> 1.0)
       rack (>= 2.2.4, < 4)
@@ -412,7 +412,7 @@ DEPENDENCIES
   selenium-webdriver
   sitemap_generator
   social-share-button
-  spring
+  spring (~> 4.1)
   sprockets (~> 4.2)
   sqlite3 (~> 1.4)
   turbolinks (~> 5)
