@@ -85,3 +85,7 @@ gem "jekyll", "~> 3.6.3"
 gem "minima", "~> 2.0"
 # jekyll sitemaps
 gem 'jekyll-sitemap'
+
+gem "brakeman", "~> 5.4"
+
+gem "colorize", "~> 1.1"
