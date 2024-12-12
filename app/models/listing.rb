@@ -20,7 +20,7 @@
 #
 
 class Listing < ApplicationRecord
-  
+
   belongs_to :category
   has_one :order
 
@@ -31,7 +31,7 @@ class Listing < ApplicationRecord
   has_rich_text :description
   has_rich_text :how_to_apply
   has_rich_text :company_about
-  
+
   has_one_attached :company_logo
 
   def new
@@ -73,6 +73,14 @@ class Listing < ApplicationRecord
   def to_param
     slug = title.parameterize
     "#{id}-#{slug}"
+  end
+
+  def self.ransackable_associations(auth_object = nil)
+    ["category", "company_logo_attachment", "company_logo_blob", "order", "rich_text_company_about", "rich_text_description", "rich_text_how_to_apply"]
+  end
+
+  def self.ransackable_attributes(auth_object = nil)
+    ["category_id", "company_email", "company_name", "company_website", "created_at", "expired", "highlight", "id", "industry", "location", "logo_displayed", "paid", "sticky", "title", "updated_at"]
   end
 
 end

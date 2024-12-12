@@ -55,3 +55,4 @@ lib/tasks/jekyll.rake
 /yarn-error.log
 yarn-debug.log*
 .yarn-integrity
+Gemfile.lock.orig
